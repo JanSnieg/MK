@@ -68,9 +68,17 @@ void Kula15D (int pointsInCube)
     std::cout << "\nPrawdopodobienstwo trafienia:\t" << Prawdopodobienstwo << "%\n\n";
 }
 
-void Calka(int N)
+double Calka(int N)
 {
-    
+    std::mt19937 gen{std::random_device{}()};
+    std::uniform_real_distribution<double> generate{-2.,2.};
+    double result = 0;
+    for (int i=0; i<N; i++)
+    {
+        double punkt = generate(gen);
+        result += 1/sqrt(2 * M_PI) * std::exp((-punkt*punkt)/2);
+    }
+    return result/N;
 }
 
 void Tasowanie(int N)
@@ -89,15 +97,9 @@ void Tasowanie(int N)
     int n = 0;
     do {
         int r = rand() % talia.size();
-//        std::cout << "\n" << n << "\t\t" << r << "\t\t";
-//        for (int i:talia)
-//        {
-//            std::cout << i << " ";
-//        }
         if (r == n)
         {
             sukces++;
-//            std::cout << "<< sukces";
         }
         talia.erase(talia.begin()+r);
         n++;
@@ -107,22 +109,24 @@ void Tasowanie(int N)
 
 int main(int argc, const char * argv[])
 {
-//    std::cout << "\t------ KULA 3D -----\n\n";
-//    Kula3D(100);
-//    Kula3D(10000);
-//    Kula3D(1000000);
-//    std::cout << "\t------ KULA 15D -----\n\n";
-//    Kula15D(100);
-//    Kula15D(10000);
-//    Kula15D(1000000);
+    std::cout << "\t------ KULA 3D -----\n\n";
+    Kula3D(100);
+    Kula3D(10000);
+    Kula3D(1000000);
+    std::cout << "\t------ KULA 15D -----\n\n";
+    Kula15D(100);
+    Kula15D(10000);
+    Kula15D(1000000);
+    int N = 100000;
+    std::cout << "\t----- CALKA -----\n\n";
+    std::cout << "N:\t" << N << "\tSrednia:\t" << Calka(N) << std::endl;
     std::cout << "\t----- TALIA -----\n\n";
     int liczbaLosowan = 10000;
+    std::cout << "Liczba losowań w tali ze 100 kartami:\t" << liczbaLosowan << std::endl;
     for (int i =0; i<liczbaLosowan; i++)
     {
-//        std::cout << "\nn\t\tr\t\ttalia\n";
         Tasowanie(100);
-//        std::cout << "\nIlosc sukcesow: " << sukces << std::endl;
     }
-    std::cout << "liczba suksecow: " << sukces << "\nPrawdopodobienstwo: " << (double)sukces/liczbaLosowan << "\n";
+    std::cout << "liczba suksecow: " << sukces << "\nPrawdopodobienstwo: " << (double)sukces/liczbaLosowan*100 << "\n";
     return 0;
 }
