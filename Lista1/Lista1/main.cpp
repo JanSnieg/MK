@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <algorithm>
 #include <chrono>
+#include <ctime>
 
 int sukces = 0;
 
@@ -59,7 +60,7 @@ void Kula15D (int pointsInCube)
     double Objetosc = pow(2, 15) * pointsInBall/pointsInCube;
     double Prawdopodobienstwo;
     if (pointsInBall != 0)
-        Prawdopodobienstwo = (double)pointsInBall/pointsInCube*100;
+        Prawdopodobienstwo = (double)pointsInBall/(pointsInCube*100);
     else
         Prawdopodobienstwo = 0;
     std::cout << "Liczba losowanych punktow:\t\t" << pointsInCube;
@@ -78,32 +79,29 @@ double Calka(int N)
         double punkt = generate(gen);
         result += 1/sqrt(2 * M_PI) * std::exp((-punkt*punkt)/2);
     }
-    return result/N;
+    return (result/N) * 4;
 }
 
 void Tasowanie(int N)
 {
-    srand(time(NULL));
     unsigned seed = (unsigned)std::chrono::system_clock::now().time_since_epoch().count();
     std::vector<int> talia;
     //Generate card deck
-    for (int i=1; i<=N; i++)
+    for (int i=0; i<N; i++)
     {
         talia.push_back(i);
     }
     //Shuffle deck
     shuffle (talia.begin(), talia.end(), std::default_random_engine(seed));
     //Pull card
-    int n = 0;
-    do {
-        int r = rand() % talia.size();
-        if (r == n)
+    for (int i=0; i<talia.size(); i++)
+    {
+        if (i == talia[i])
         {
             sukces++;
         }
-        talia.erase(talia.begin()+r);
-        n++;
-    } while (talia.size() > 0);
+//        talia.erase(talia.begin());
+    }
     
 }
 
@@ -127,6 +125,6 @@ int main(int argc, const char * argv[])
     {
         Tasowanie(100);
     }
-    std::cout << "liczba suksecow: " << sukces << "\nPrawdopodobienstwo: " << (double)sukces/liczbaLosowan*100 << "\n";
+    std::cout << "liczba suksecow:\t\t\t\t\t\t" << sukces << "\nPrawdopodobienstwo:\t\t\t\t\t\t" << (double)sukces/liczbaLosowan << "%\n";
     return 0;
 }
