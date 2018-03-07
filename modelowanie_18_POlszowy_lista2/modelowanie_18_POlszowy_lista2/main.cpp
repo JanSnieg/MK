@@ -20,10 +20,10 @@ void zad1()
     std::ofstream myExcelFile;
     myExcelFile.open("/Users/jansnieg/Documents/ISSP6/MK/zad1a.csv");
     std::mt19937 gen{std::random_device{}()};
-    std::uniform_real_distribution<double> generate{-1.0,1.0};
+    std::uniform_real_distribution<double> generate{0.,1.0};
     for (int i=0; i<100; i++)
     {
-        if(generate(gen) < 0 )
+        if(generate(gen) < 0.5 )
             position --;
         else
             position++;
@@ -34,7 +34,7 @@ void zad1()
     myExcelFile.open("/Users/jansnieg/Documents/ISSP6/MK/zad1b.csv");
     //Przygotowanie wektora do wpisywania pozycji
     std::vector<int> lastPosition;
-    for (int i=-100; i<=100; i++)
+    for (int i=0; i<=200; i++)
     {
         lastPosition.push_back(0);
     }
@@ -43,7 +43,7 @@ void zad1()
         position = 0;
         for (int j=0; j<100; j++)
         {
-            if(generate(gen) < 0 )
+            if(generate(gen) < 0.5 )
                 position --;
             else
                 position++;
@@ -57,7 +57,7 @@ void zad1()
     myExcelFile.close();
 }
 
-void zad2()
+void zad2(double szansa)
 {
     //pojedyńczy walker
     int position =0;
@@ -70,12 +70,12 @@ void zad2()
     {
         if(generate(gen) < p)
         {
-            p = 0.8;
+            p = szansa;
             position --;
         }
         else
         {
-            p = 0.2;
+            p = 1 - szansa;
             position++;
         }
         myExcelFile << position << std::endl;
@@ -96,7 +96,7 @@ void zad2()
         p = 0.5;
         for (int j=0; j<100; j++)
         {
-            if(generate(gen) < p )
+            if(generate(gen) < p)
             {
                 p = 0.8;
                 position --;
@@ -133,7 +133,7 @@ int zad3(int A, int startposition)
                 position --;
             else
                 position ++;
-        } while (position >= 0 && position < 2*A && tempt < 100);
+        } while (position >= 0 && position < 2*A);
         t += tempt;
     }
     return t;
@@ -142,9 +142,9 @@ int zad3(int A, int startposition)
 int main(int argc, const char * argv[])
 {
 //    zad1();
-//    zad2();
+    zad2(0.2);
     std::ofstream myExcelFile;
-    int A = 20;
+    int A = 5;
     myExcelFile.open("/Users/jansnieg/Documents/ISSP6/MK/zad3.csv");
     for(int i=0; i<2*A; i++)
     {
