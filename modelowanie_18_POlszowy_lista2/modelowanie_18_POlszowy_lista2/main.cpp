@@ -11,6 +11,8 @@
 #include <random>
 #include <fstream>
 
+std::vector<int> TIMEVECTOR;
+
 void zad1()
 {
     //pojedyńczy walker
@@ -114,37 +116,39 @@ void zad2()
     myExcelFile.close();
 }
 
-void zad3(int A)
+int zad3(int A, int startposition)
 {
     int position;
-    double t = 0;
-    double tsrednie;
+    int t = 0;
     std::mt19937 gen{std::random_device{}()};
     std::uniform_real_distribution<double> generate{0.,1.0};
     for (int i=0; i<10000; i++)
     {
-        position = A/2;
-        for (int j=0; j<100; j++)
+        position = startposition;
+        int tempt = 0;
+        do
         {
-            if (position > 0 || position < A)
-            {
-                t ++;
-                if(generate(gen) < 0.5)
-                    position --;
-                else
-                    position ++;
-            }
-        }
-        std::cout << t/100 << std::endl;
+            tempt ++;
+            if(generate(gen) < 0.5)
+                position --;
+            else
+                position ++;
+        } while (position >= 0 && position < 2*A && tempt < 100);
+        t += tempt;
     }
-    tsrednie = t/1000000;
-    std::cout << tsrednie <<std::endl;
+    return t;
 }
 
 int main(int argc, const char * argv[])
 {
 //    zad1();
 //    zad2();
-    zad3(5);
+    std::ofstream myExcelFile;
+    int A = 20;
+    myExcelFile.open("/Users/jansnieg/Documents/ISSP6/MK/zad3.csv");
+    for(int i=0; i<2*A; i++)
+    {
+        myExcelFile << i << "\t" << zad3(A, i) << std::endl;
+    }
     return 0;
 }

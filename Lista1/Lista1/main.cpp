@@ -107,14 +107,14 @@ void Tasowanie(int N)
 
 int main(int argc, const char * argv[])
 {
-    std::cout << "\t------ KULA 3D -----\n\n";
-    Kula3D(100);
-    Kula3D(10000);
-    Kula3D(1000000);
-    std::cout << "\t------ KULA 15D -----\n\n";
-    Kula15D(100);
-    Kula15D(10000);
-    Kula15D(1000000);
+//    std::cout << "\t------ KULA 3D -----\n\n";
+//    Kula3D(100);
+//    Kula3D(10000);
+//    Kula3D(1000000);
+//    std::cout << "\t------ KULA 15D -----\n\n";
+//    Kula15D(100);
+//    Kula15D(10000);
+//    Kula15D(1000000);
     int N = 100000;
     std::cout << "\t----- CALKA -----\n\n";
     std::cout << "N:\t" << N << "\tSrednia:\t" << Calka(N) << std::endl;
