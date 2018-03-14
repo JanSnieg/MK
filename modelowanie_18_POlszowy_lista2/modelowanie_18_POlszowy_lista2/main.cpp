@@ -139,10 +139,47 @@ int zad3(int A, int startposition)
     return t;
 }
 
+void zad2Odchylenie(int range, double szansa)
+{
+    std::mt19937 gen{std::random_device{}()};
+    std::uniform_real_distribution<double> generate{0.,1.0};
+    std::vector<int> positionVector;
+    int position =0;
+    double p = 0.5;
+    double avDeviation = 0.0;
+    for (auto i=0; i<range; i++)
+    {
+        if(generate(gen) < p)
+        {
+            p = szansa;
+            position --;
+        }
+        else
+        {
+            p = 1 - szansa;
+            position++;
+        }
+        positionVector.push_back(position);
+    }
+    std::cout << "Położenie końcowe: " << position << std::endl;
+    double avPosition = (double)position/range;
+    std::cout << "Średnie położenie: " << avPosition << std::endl;
+    //obliczanie średniego odchylenia kwadratowego
+    for (auto i=0; i<positionVector.size(); i++)
+        avDeviation += pow((positionVector[i] - avPosition),2);
+    avDeviation = sqrt(avDeviation/range);
+    std::cout << "Średnie odchylenie kwadratowe: " << avDeviation << std::endl;
+    
+}
+
 int main(int argc, const char * argv[])
 {
 //    zad1();
-    zad2(0.2);
+//    zad2(0.5);
+    std::cout << "\nSredniokwadratowe dla 0.2: \n";
+    zad2Odchylenie(100, 0.2);
+    std::cout << "\nSredniokwadratowe dla 0.8: \n";
+    zad2Odchylenie(100, 0.8);
     std::ofstream myExcelFile;
     int A = 5;
     myExcelFile.open("/Users/jansnieg/Documents/ISSP6/MK/zad3.csv");
