@@ -32,13 +32,15 @@ void zad1()
     myExcelFile.close();
     //10000 wedrowniczkow
     myExcelFile.open("/Users/jansnieg/Documents/ISSP6/MK/zad1b.csv");
+    
     //Przygotowanie wektora do wpisywania pozycji
     std::vector<int> lastPosition;
+    int range = 10000;
     for (int i=0; i<=200; i++)
     {
         lastPosition.push_back(0);
     }
-    for (int i=0; i<10000; i++)
+    for (int i=0; i<range; i++)
     {
         position = 0;
         for (int j=0; j<100; j++)
@@ -48,12 +50,11 @@ void zad1()
             else
                 position++;
         }
+
         lastPosition[position+100] ++;
     }
     for (int i=0; i<lastPosition.size(); i++)
-    {
         myExcelFile << lastPosition[i] << std::endl;
-    }
     myExcelFile.close();
 }
 
@@ -81,39 +82,47 @@ void zad2(double szansa)
         myExcelFile << position << std::endl;
     }
     myExcelFile.close();
-
-
-    myExcelFile.open("/Users/jansnieg/Documents/ISSP6/MK/zad2b.csv");
+    std::ofstream avDev;
+    avDev.open("/Users/jansnieg/Documents/ISSP6/MK/modelowanie_18_POlszowy_lista2/zad2Dev.csv");
+    myExcelFile.open("/Users/jansnieg/Documents/ISSP6/MK/modelowanie_18_POlszowy_lista2/zad2b.csv");
     //getting position vector ready
     std::vector<int> lastPosition;
+    std::vector<int> deviationVector;
     for (int i=-100; i<=100; i++)
-    {
         lastPosition.push_back(0);
-    }
+    for (int i=0; i<100; i++)
+        deviationVector.push_back(0);
     for (int i=0; i<10000; i++)
     {
+        int range = 100;
+        std::vector<int> positionVector;
         position = 0;
         p = 0.5;
-        for (int j=0; j<100; j++)
+        for (int j=0; j<range; j++)
         {
             if(generate(gen) < p)
             {
-                p = 0.8;
+                p = szansa;
                 position --;
             }
             else
             {
-                p = 0.2;
+                p = 1 - szansa;
                 position++;
             }
+            positionVector.push_back(position);
+            deviationVector[j] += position*position;
         }
         lastPosition[position+100] ++;
     }
+    for (auto i=0; i<deviationVector.size(); i++)
+        avDev << (deviationVector[i] /= 10000) << std::endl;
     for (int i=0; i<lastPosition.size(); i++)
     {
         myExcelFile << lastPosition[i] << std::endl;
     }
     myExcelFile.close();
+    avDev.close();
 }
 
 int zad3(int A, int startposition)
@@ -139,7 +148,7 @@ int zad3(int A, int startposition)
     return t;
 }
 
-void zad2Odchylenie(int range, double szansa)
+void zad2Odchylenie(int range, int szansa)
 {
     std::mt19937 gen{std::random_device{}()};
     std::uniform_real_distribution<double> generate{0.,1.0};
@@ -175,17 +184,13 @@ void zad2Odchylenie(int range, double szansa)
 int main(int argc, const char * argv[])
 {
 //    zad1();
-//    zad2(0.5);
-    std::cout << "\nSredniokwadratowe dla 0.2: \n";
-    zad2Odchylenie(100, 0.2);
-    std::cout << "\nSredniokwadratowe dla 0.8: \n";
-    zad2Odchylenie(100, 0.8);
-    std::ofstream myExcelFile;
-    int A = 5;
-    myExcelFile.open("/Users/jansnieg/Documents/ISSP6/MK/zad3.csv");
-    for(int i=0; i<2*A; i++)
-    {
-        myExcelFile << i << "\t" << zad3(A, i) << std::endl;
-    }
+    zad2(0.2);
+//    std::ofstream myExcelFile;
+//    int A = 5;
+//    myExcelFile.open("/Users/jansnieg/Documents/ISSP6/MK/zad3.csv");
+//    for(int i=0; i<2*A; i++)
+//    {
+//        myExcelFile << i << "\t" << zad3(A, i) << std::endl;
+//    }
     return 0;
 }
