@@ -1,11 +1,13 @@
 #pragma once
 
 #include "zad1.h"
+#include "zad2.hpp"
 
 class ofApp : public ofBaseApp{
 
 	public:
     ofPolyline line;
+    int walker1b;
 		void setup();
 		void update();
 		void draw();

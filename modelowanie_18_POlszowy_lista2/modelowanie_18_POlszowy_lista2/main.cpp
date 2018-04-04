@@ -148,12 +148,12 @@ int zad3(int A, int startposition)
     return t;
 }
 
-void zad2Odchylenie(int range, int szansa)
+double zad2Odchylenie(int range, double szansa)
 {
     std::mt19937 gen{std::random_device{}()};
     std::uniform_real_distribution<double> generate{0.,1.0};
     std::vector<int> positionVector;
-    int position =0;
+    int position = 0;
     double p = 0.5;
     double avDeviation = 0.0;
     for (auto i=0; i<range; i++)
@@ -161,7 +161,7 @@ void zad2Odchylenie(int range, int szansa)
         if(generate(gen) < p)
         {
             p = szansa;
-            position --;
+            position--;
         }
         else
         {
@@ -170,21 +170,32 @@ void zad2Odchylenie(int range, int szansa)
         }
         positionVector.push_back(position);
     }
-    std::cout << "Położenie końcowe: " << position << std::endl;
+//    std::cout << "Położenie końcowe: " << position << std::endl;
     double avPosition = (double)position/range;
-    std::cout << "Średnie położenie: " << avPosition << std::endl;
+//    std::cout << "Średnie położenie: " << avPosition << std::endl;
     //obliczanie średniego odchylenia kwadratowego
     for (auto i=0; i<positionVector.size(); i++)
-        avDeviation += pow((positionVector[i] - avPosition),2);
+        avDeviation += pow(((double)positionVector[i] - avPosition),2);
     avDeviation = sqrt(avDeviation/range);
-    std::cout << "Średnie odchylenie kwadratowe: " << avDeviation << std::endl;
-    
+//    std::cout << "Średnie odchylenie kwadratowe: " << avDeviation << std::endl;
+    return avDeviation;
 }
 
 int main(int argc, const char * argv[])
 {
 //    zad1();
     zad2(0.2);
+//    double srednia02 = 0.;
+//    double srednia08 = 0.;
+//    for (auto k=0; k<10000; k++)
+//    {
+//        srednia08 += zad2Odchylenie(100, 0.8);
+//        srednia02 += zad2Odchylenie(100, 0.2);
+//    }
+//    srednia02 /= 10000;
+//    srednia08 /= 10000;
+//    std::cout << "SREDNIA dla p = 0.2: " << srednia02 << std::endl;
+//    std::cout << "SREDNIA dla p = 0.8: " << srednia08 << std::endl;
 //    std::ofstream myExcelFile;
 //    int A = 5;
 //    myExcelFile.open("/Users/jansnieg/Documents/ISSP6/MK/zad3.csv");

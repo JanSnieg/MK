@@ -3,7 +3,9 @@
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-    line = walkway(line);
+    walker1b = walker10000();
+//    line = walkway(line);
+    line = walkway2(line);
 }
 
 //--------------------------------------------------------------
@@ -16,6 +18,7 @@ void ofApp::update()
 void ofApp::draw()
 {
     line.draw();
+    ofDrawBitmapStringHighlight("Count dla 10000 wędrowniczków: " + ofToString(walker1b), 20, 20);
 }
 
 //--------------------------------------------------------------
