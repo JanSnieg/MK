@@ -3,9 +3,15 @@
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-    walker1b = walker10000();
+    ofSetLineWidth(5);
+//    cam.setDistance(5000);
+//    walker1b = walker10000();
 //    line = walkway(line);
-    line = walkway2(line);
+//    line = walkway2(line);
+//    line = walkway3(line);
+    ofSetColor(0, 0, 0);
+    statistics();
+    statistics5();
 }
 
 //--------------------------------------------------------------
@@ -17,8 +23,10 @@ void ofApp::update()
 //--------------------------------------------------------------
 void ofApp::draw()
 {
-    line.draw();
-    ofDrawBitmapStringHighlight("Count dla 10000 wędrowniczków: " + ofToString(walker1b), 20, 20);
+//    cam.begin();
+//    line.draw();
+//    cam.end();
+//    ofDrawBitmapStringHighlight("Count dla 10000 wędrowniczków: " + ofToString(walker1b), 20, 20);
 }
 
 //--------------------------------------------------------------
