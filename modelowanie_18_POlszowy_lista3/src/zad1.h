@@ -10,8 +10,8 @@ struct WalkerPosition
     int x, y;
     WalkerPosition ()
     {
-        x = ofGetWidth()/2;
-        y = ofGetHeight()/2;
+        x = 0;
+        y = 0;
     }
 };
 

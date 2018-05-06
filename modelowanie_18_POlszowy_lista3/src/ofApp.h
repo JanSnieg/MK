@@ -9,7 +9,9 @@
 class ofApp : public ofBaseApp{
 
 	public:
-    ofPolyline line;
+    ofPolyline line1;
+    ofPolyline line2;
+    ofPolyline line3;
     ofEasyCam cam;
     int walker1b;
 		void setup();

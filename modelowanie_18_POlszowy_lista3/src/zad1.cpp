@@ -14,10 +14,10 @@ ofPolyline walkway(ofPolyline line)
         while (!los);
         if (los & 1) //-1 albo 1
                      //poziomo
-            walker.x += (los * 10);
+            walker.x += los;
         else        //-2 albo 2
                     //pionowo
-            walker.y += (los * 5);
+            walker.y += los/2;
         line.addVertex(ofVec2f(walker.x, walker.y));
     }
     line.end();

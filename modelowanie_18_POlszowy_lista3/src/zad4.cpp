@@ -35,21 +35,25 @@ void statistics()
 {
     std::ofstream avDev;
     avDev.open("/Users/jansnieg/Documents/ISSP6/MK/modelowanie_18_POlszowy_lista3/zad3Odchylenie.txt");
-    std::vector<double> odchylenie;
-    double sredniCzasSpadku = 0;
-    for (int i=0; i<10; i++)
-        odchylenie.push_back(0);
-    for(int i=100; i<1000; i+=100)
+    int ilosc = 1000;
+    double odchylenie[11] = {0};
+    for(int i=100; i<=1000; i+=100)
     {
-        rainDrop drop = rainDrop(i);
-        drop = raining(drop);
-        sredniCzasSpadku += drop.czasSpadku;
-        odchylenie[i/100] += (double)(drop.x * drop.x)/drop.czasSpadku;
-        int calkowita = (int)odchylenie[i/100];
-        unsigned int dziesietna = odchylenie[i/100]*1000;
-        avDev << i << "\t" << calkowita << "," << dziesietna << std::endl;
+        double sredniCzasSpadku = 0;
+        for(int j=0; j<ilosc; j++)
+        {
+            rainDrop drop = rainDrop(i);
+            drop = raining(drop);
+            sredniCzasSpadku += drop.czasSpadku;
+            odchylenie[i/100] += (double)(drop.x * drop.x);
+        }
+        std::cout << "Wysokość: " << i << "\tSREDNI CZAS SPADKU: \t" << sredniCzasSpadku/ilosc << std::endl;
     }
-    avDev << "\t\tSREDNI CZAS SPADKU: \t" << sredniCzasSpadku/10 << std::endl;
+    for (auto i=1; i<11; i++)
+    {
+        odchylenie[i] /= ilosc;
+        avDev << odchylenie[i] << std::endl;
+    }
     avDev.close();
     
 }

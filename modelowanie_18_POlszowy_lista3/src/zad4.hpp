@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <random>
 #include <fstream>
+#include <cmath>
 #include "ofMain.h"
 
 
