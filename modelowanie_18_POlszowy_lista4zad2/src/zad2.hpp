@@ -74,5 +74,6 @@ private:
 std::vector<ofVec2f> checkOnes();
 zlepek zadanie2(zlepek);
 void drawZlep(zlepek);
+void drawCircle();
 
 #endif /* zad2_hpp */

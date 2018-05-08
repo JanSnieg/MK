@@ -8,12 +8,17 @@ void ofApp::setup()
 //--------------------------------------------------------------
 void ofApp::update()
 {
-    if (ofGetFrameNum()%2 == 0)
+    if (zlep.position.size() <1000)
     {
         if(canExtand)
+        {
             zlep = zadanie2(zlep);
-        ones = checkOnes();
+            ones = checkOnes();
+        }
     }
+    else
+        canExtand = false;
+    
 }
 
 //--------------------------------------------------------------
@@ -21,6 +26,7 @@ void ofApp::draw()
 {
     ofDrawBitmapStringHighlight("ILOSC MOZLIWYCH MIEJSC DO WPISANIA: " + ofToString(ones.size()) +
         "\nILOSC WPISANYCH: " + ofToString(zlep.position.size()), 20,20);
+    drawCircle();
     drawZlep(zlep);
 }
 

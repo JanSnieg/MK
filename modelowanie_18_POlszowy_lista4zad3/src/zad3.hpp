@@ -66,8 +66,11 @@ struct zlepek
 private:
     void addOnes(ofVec2f vec)
     {
+//        ofVec2f middle = ofVec2f(WIDTH/2, HEIGHT/2);
         int x = (int)vec.x;
         int y = (int)vec.y;
+        if (x == WIDTH/2 && y == HEIGHT/2)
+            canExtand = false;
         if (x<WIDTH && y<HEIGHT && x>0 && y>0)
         {
             //sprawdznie wszystkich miejsc wokół x,y

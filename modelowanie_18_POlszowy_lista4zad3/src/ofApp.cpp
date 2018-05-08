@@ -8,10 +8,9 @@ void ofApp::setup()
 //--------------------------------------------------------------
 void ofApp::update()
 {
-    if (ofGetFrameNum()%2 == 0)
+    if(canExtand)
     {
-        if(canExtand)
-            zlep = zadanie3(zlep);
+        zlep = zadanie3(zlep);
         ones = checkOnes();
     }
 }

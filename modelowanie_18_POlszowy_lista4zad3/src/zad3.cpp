@@ -52,7 +52,6 @@ zlepek zadanie3(zlepek zlep)
             isGoing = false;
         }
     } while (isGoing &&
-             wedrownik != middle &&
              wedrownik.x<WIDTH && wedrownik.x>0 &&
              wedrownik.y<HEIGHT && wedrownik.y>0);
     return zlep;

@@ -69,4 +69,9 @@ void drawZlep(zlepek zlep)
     }
     
 }
+void drawCircle()
+{
+    ofSetColor(127,38,0,100);
+    ofDrawCircle(WIDTH/2, HEIGHT/2, 150);
+}
 
