@@ -7,7 +7,7 @@
 
 #include "zad2.hpp"
 int mainArray[WIDTH][HEIGHT] {0};
-bool canGo = true;
+bool canExtand = true;
 ofVec2f wedrownik = ofVec2f(1,1);
 
 std::vector<ofVec2f> checkOnes()
@@ -37,6 +37,7 @@ zlepek zadanie2(zlepek zlep)
     double kat = generateAlfa(gen);
     wedrownik = ofVec2f((int)(middle.x + RADIOUS*cos(kat)),
                         (int)(middle.y + RADIOUS*sin(kat)));
+    //Początkowe koordunaty wedrownika
     std::vector<ofVec2f> wayOut =
     {ofVec2f(0,1), ofVec2f(0,-1), ofVec2f(1,0), ofVec2f(-1,0)};
     //vector posiadający wszystkie cztery możliwe drogi
@@ -45,21 +46,16 @@ zlepek zadanie2(zlepek zlep)
         std::uniform_int_distribution<int> generateInt{0, 3};
         int los = generateInt(gen);
         wedrownik += wayOut[los];
+        //przesunięcie wędrowniczka
         if (mainArray[(int)wedrownik.x][(int)wedrownik.y] == 1)
         {
             zlep.addPos(wedrownik);
             isGoing = false;
         }
     } while (isGoing &&
-             wedrownik.x<WIDTH && wedrownik.x>0 &&
-             wedrownik.y<HEIGHT && wedrownik.y>0);
+             wedrownik.x<SMALLWIDTH && wedrownik.x>0 &&
+             wedrownik.y<SMALLHEIGHT && wedrownik.y>0);
     return zlep;
-}
-
-void drawWedrownik(ofVec2f wedrownik)
-{
-    ofSetColor(200, 10, 10);
-    ofDrawRectangle(wedrownik, STEP, STEP);
 }
 
 void drawZlep(zlepek zlep)

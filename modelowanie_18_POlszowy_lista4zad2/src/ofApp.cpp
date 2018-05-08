@@ -3,16 +3,17 @@
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-    
 }
 
 //--------------------------------------------------------------
 void ofApp::update()
 {
-    if(canGo)
-        zlep = zadanie2(zlep);
-    ones = checkOnes();
-    
+    if (ofGetFrameNum()%2 == 0)
+    {
+        if(canExtand)
+            zlep = zadanie2(zlep);
+        ones = checkOnes();
+    }
 }
 
 //--------------------------------------------------------------
@@ -20,7 +21,6 @@ void ofApp::draw()
 {
     ofDrawBitmapStringHighlight("ILOSC MOZLIWYCH MIEJSC DO WPISANIA: " + ofToString(ones.size()) +
         "\nILOSC WPISANYCH: " + ofToString(zlep.position.size()), 20,20);
-    drawWedrownik(wedrownik);
     drawZlep(zlep);
 }
 

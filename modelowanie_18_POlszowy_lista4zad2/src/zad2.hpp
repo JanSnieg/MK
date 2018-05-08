@@ -9,7 +9,9 @@
 #define zad2_hpp
 #define WIDTH 1024
 #define HEIGHT 768
-#define STEP 5
+#define SMALLWIDTH 620
+#define SMALLHEIGHT 482
+#define STEP 2
 #define RADIOUS 150
 
 #include <stdio.h>
@@ -22,7 +24,7 @@ extern int mainArray[WIDTH][HEIGHT];
  0 - za daleko do wpisania
  1 - mozliwe do wpisania
  2 - zajete miejsce*/
-extern bool canGo;
+extern bool canExtand;
 extern ofVec2f wedrownik;
 
 struct zlepek
@@ -66,12 +68,11 @@ private:
                 mainArray[x][y-STEP] = 1;
         }
         else
-            canGo = false;
+            canExtand = false;
     }
 };
 std::vector<ofVec2f> checkOnes();
 zlepek zadanie2(zlepek);
 void drawZlep(zlepek);
-void drawWedrownik(ofVec2f);
 
 #endif /* zad2_hpp */
