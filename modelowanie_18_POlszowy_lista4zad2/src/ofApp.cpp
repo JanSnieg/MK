@@ -8,16 +8,16 @@ void ofApp::setup()
 //--------------------------------------------------------------
 void ofApp::update()
 {
-    if (zlep.position.size() <1000)
-    {
+//    if (zlep.position.size() <1000)
+//    {
         if(canExtand)
         {
             zlep = zadanie2(zlep);
             ones = checkOnes();
         }
-    }
-    else
-        canExtand = false;
+//    }
+//    else
+//        canExtand = false;
     
 }
 

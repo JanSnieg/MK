@@ -10,7 +10,7 @@
 #define WIDTH 1024
 #define HEIGHT 768
 #define LENGTH 300
-#define STEP 5
+#define STEP 1
 
 #include <stdio.h>
 #include <vector>
@@ -54,22 +54,22 @@ struct zlepek
     void addPos(int x, int y)
     {
         position.push_back(ofVec2f(x,y));
-        mainArray[x][y] = 0;
+        mainArray[x][y] = 2;
         addOnes(ofVec2f(x, y));
     }
     void addPos(ofVec2f vec)
     {
         position.push_back(vec);
-        mainArray[(int)vec.x][(int)vec.y];
+        mainArray[(int)vec.x][(int)vec.y] = 2;
         addOnes(vec);
     }
 private:
     void addOnes(ofVec2f vec)
     {
-//        ofVec2f middle = ofVec2f(WIDTH/2, HEIGHT/2);
+        ofVec2f middle = ofVec2f(WIDTH/2, HEIGHT/2);
         int x = (int)vec.x;
         int y = (int)vec.y;
-        if (x == WIDTH/2 && y == HEIGHT/2)
+        if (middle.distance(vec) < STEP)
             canExtand = false;
         if (x<WIDTH && y<HEIGHT && x>0 && y>0)
         {

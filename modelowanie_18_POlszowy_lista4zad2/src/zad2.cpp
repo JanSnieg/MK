@@ -52,26 +52,31 @@ zlepek zadanie2(zlepek zlep)
             zlep.addPos(wedrownik);
             isGoing = false;
         }
-    } while (isGoing &&
-             wedrownik.x<SMALLWIDTH && wedrownik.x>0 &&
-             wedrownik.y<SMALLHEIGHT && wedrownik.y>0);
+    } while (isGoing && middle.distance(wedrownik) < RADIOUS + 10);
     return zlep;
 }
 
 void drawZlep(zlepek zlep)
 {
-    
-    for(auto i=0; i<zlep.position.size(); i++)
+    ofColor color = (0, 100, 20);
+    int c=0;
+    for(auto i=0; i<zlep.position.size(); i++, c++)
     {
-        ofSetColor(zlep.color);
-        zlep.color += (1,0,0);
+        if (c==20)
+        {
+            color.r ++;
+            c=0;
+        }
+        ofSetColor(color);
         ofDrawRectangle(zlep.position[i], STEP, STEP);
     }
     
 }
 void drawCircle()
 {
-    ofSetColor(127,38,0,100);
-    ofDrawCircle(WIDTH/2, HEIGHT/2, 150);
+    ofSetColor(255,255,255);
+    ofDrawCircle(WIDTH/2, HEIGHT/2, RADIOUS);
+    ofSetColor(0, 0, 100, 100);
+    ofDrawCircle(WIDTH/2, HEIGHT/2, RADIOUS+10);
 }
 

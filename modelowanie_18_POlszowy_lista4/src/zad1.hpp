@@ -34,13 +34,13 @@ struct zlepek
     void addPos(int x, int y)
     {
         position.push_back(ofVec2f(x,y));
-        mainArray[x][y] = 0;
+        mainArray[x][y] = 2;
         addOnes(ofVec2f(x, y));
     }
     void addPos(ofVec2f vec)
     {
         position.push_back(vec);
-        mainArray[(int)vec.x][(int)vec.y];
+        mainArray[(int)vec.x][(int)vec.y] =2;
         addOnes(vec);
     }
 private:

@@ -40,11 +40,16 @@ zlepek zadanie1(zlepek zlep)
 
 void drawZlep(zlepek zlep)
 {
-    
-    for(auto i=0; i<zlep.position.size(); i++)
+    ofColor color = (0,0,0);
+    int c=0;
+    for(auto i=0; i<zlep.position.size(); i++, c++)
     {
-        ofSetColor(zlep.color);
-        zlep.color += (1,0,0);
+        if(c==10)
+        {
+            color.b ++;
+            c=0;
+        }
+        ofSetColor(color);
         ofDrawRectangle(zlep.position[i], STEP, STEP);
     }
     
