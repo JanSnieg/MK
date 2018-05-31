@@ -9,7 +9,7 @@
 #define zad2_hpp
 #define WIDTH 1024
 #define HEIGHT 768
-#define STEP 1
+#define STEP 2
 #define RADIOUS 150
 
 #include <stdio.h>

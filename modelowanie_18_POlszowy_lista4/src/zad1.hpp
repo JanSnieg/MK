@@ -9,7 +9,7 @@
 #define zad1_hpp
 #define WIDTH 1024
 #define HEIGHT 768
-#define STEP 5
+#define STEP 3
 
 #include <stdio.h>
 #include <vector>

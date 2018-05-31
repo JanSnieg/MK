@@ -40,13 +40,19 @@ zlepek zadanie1(zlepek zlep)
 
 void drawZlep(zlepek zlep)
 {
-    ofColor color = (0,0,0);
+    ofVec2f middle = ofVec2f(WIDTH/2, HEIGHT/2);
+    ofColor color = (127,0,85);
     int c=0;
+    int max = 25;
     for(auto i=0; i<zlep.position.size(); i++, c++)
     {
-        if(c==10)
+//        color.b = middle.distance(zlep.position[i]);
+        if(c==max)
         {
+            color.g += 3;
+            color.r += 2;
             color.b ++;
+            max ++;
             c=0;
         }
         ofSetColor(color);

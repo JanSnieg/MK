@@ -6,7 +6,7 @@ ofPolyline walkway3(ofPolyline line)
     line.begin();
     std::mt19937 gen{std::random_device{}()};
     std::uniform_int_distribution<int> generate{-3,3};
-    for (int i=0; i<1000; i++)
+    for (int i=0; i<10000; i++)
     {
         int los;
         do

@@ -58,13 +58,13 @@ zlepek zadanie2(zlepek zlep)
 
 void drawZlep(zlepek zlep)
 {
-    ofColor color = (0, 100, 20);
-    int c=0;
+    ofColor color = (100, 50, 0);
+    short c=0;
     for(auto i=0; i<zlep.position.size(); i++, c++)
     {
-        if (c==20)
+        if (c==10)
         {
-            color.r ++;
+            color += (0,2,1);
             c=0;
         }
         ofSetColor(color);

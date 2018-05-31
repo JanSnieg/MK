@@ -8,9 +8,9 @@ void ofApp::setup()
     cam.setDistance(50);
     walker1b = walker10000();
     
-    line1 = walkway(line1);
+//    line1 = walkway(line1);
     
-    line2 = walkway2(line2);
+//    line2 = walkway2(line2);
     
     line3 = walkway3(line3);
     

@@ -10,7 +10,7 @@
 #define WIDTH 1024
 #define HEIGHT 768
 #define LENGTH 300
-#define STEP 1
+#define STEP 3
 
 #include <stdio.h>
 #include <vector>
@@ -38,7 +38,7 @@ struct zlepek
         ofVec2f start = ofVec2f((WIDTH/2)-length, (HEIGHT/2)-length);
         ofVec2f stop = ofVec2f((WIDTH/2)+length, (HEIGHT/2)+length);
         std::vector<ofVec2f> punkty;
-        for (int i=start.x; i<stop.x; i++)
+        for (int i=start.x; i<stop.x; i+=STEP)
         {
             //        dodawanie punktów na granicy górnej i dolnej kwadrawtu
             addPos(i, start.y);

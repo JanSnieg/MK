@@ -59,14 +59,21 @@ zlepek zadanie3(zlepek zlep)
 
 void drawZlep(zlepek zlep)
 {
+    ofVec2f middle = ofVec2f(WIDTH/2, HEIGHT/2);
     ofColor color = (0,0,0);
     int c=0;
+    int max = 100;
     for(auto i=0; i<zlep.position.size(); i++, c++)
     {
-        if(c==10)
+//        int distance = middle.distance(zlep.position[i]);
+//        color.g = distance/2;
+        if(c==max)
         {
-            color.g++;
+            color.r ++;
+            color.g += 2;
+            color.b += 3;
             c=0;
+            max++;
         }
         ofSetColor(color);
         ofDrawRectangle(zlep.position[i], STEP, STEP);
