@@ -4,20 +4,22 @@
 void ofApp::setup()
 {
     mRenderer.setup(ofGetWidth(), ofGetHeight());
-    las = forest(180, 0.42);
+    las = forest(100, 0.42);
     count = 0;
+    gui.setup();
+    gui.add(velocity.setup("Velocity: ", 60, 0, 120));
 }
 
 //--------------------------------------------------------------
 void ofApp::update()
 {
-    if (ofGetFrameNum()%5 == 0)
+    if (ofGetFrameNum()%velocity == 0)
     {
         if(las.canBurn)
         {
             if(count == 0)
             {
-                mRenderer.start();
+//                mRenderer.start();
                 las.start();
             }
             else
@@ -27,24 +29,24 @@ void ofApp::update()
                 las.checkIfBurning();
             }
             count++;
-            las.countBurned();
+//            las.countBurned();
         }
-        else
-            mRenderer.stop();
+//        else
+//            mRenderer.stop();
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw()
 {
-    mRenderer.begin();
-
+//    mRenderer.begin();
     ofSetBackgroundColor(30,30,30);
     las.drawForest();
     ofDrawBitmapStringHighlight("Zliczanie kroków: " + ofToString(count), 800,20);
-    ofDrawBitmapStringHighlight("Spalone: " + ofToString(las.spalone) + "/" + ofToString(las.wszystkie), 800,40);
-    ofDrawBitmapStringHighlight("Wielkosc siatki (L): 180\nPrawdopodobieństwo 42%", 800,60);
-    mRenderer.end();
+//    ofDrawBitmapStringHighlight("Spalone: " + ofToString(las.spalone) + "/" + ofToString(las.wszystkie), 800,60);
+    ofDrawBitmapStringHighlight("Wielkosc siatki (L): " + ofToString(las.lenght) + "\nPrawdopodobieństwo 42%", 800,40);
+    gui.draw();
+//    mRendearer.end();
 }
 
 //--------------------------------------------------------------

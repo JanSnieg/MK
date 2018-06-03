@@ -9,7 +9,8 @@ class ofApp : public ofBaseApp{
     const double start = wylosuj();
     bool flag = false;
     int zadanie = 1;
-    std::vector<ofVec2f> temp;
+    std::vector<ofVec2f> graniczne;
+    std::vector<ofVec2f> lypanov;
     std::vector<ofVec2f> t;
     
 		void setup();

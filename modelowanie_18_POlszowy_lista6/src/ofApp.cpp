@@ -4,8 +4,9 @@
 void ofApp::setup()
 {
     t.push_back(ofVec2f(start,0));
-    temp = odwzorowanie_graniczne(t);
-    std::cout << temp.size();
+    graniczne = odwzorowanie_graniczne(t);
+    lypanov = Lyapunov(t);
+    std::cout << graniczne.size();
     
 }
 
@@ -21,7 +22,13 @@ void ofApp::update()
             t = odwzorowanie(t,r);
             break;
         case 2:
-            t = temp;
+            t = graniczne;
+            break;
+        case 3:
+            t = graniczne;
+            break;
+        case 4:
+            t = lypanov;
             break;
         default:
             t = odwzorowanie(t,r);
@@ -33,12 +40,23 @@ void ofApp::update()
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofDrawBitmapStringHighlight("ZADANIE: " + ofToString(zadanie), 20, 40);
+    if(zadanie == 4)
+    {
+        if(flag)
+            draw_line4(t);
+        else
+            draw_points4(t);
+    }
+    if(zadanie == 3)
+    {
+        draw_points3(t);
+    }
     if(zadanie == 2)
     {
         if(flag)
-            draw_points2(t);
+            draw_line2(t);
         else
-        draw_line2(t);
+            draw_points2(t);
     }
     if(zadanie == 1)
     {
@@ -57,6 +75,10 @@ void ofApp::keyPressed(int key)
         zadanie = 1;
     if(key == '2')
         zadanie = 2;
+    if(key == '3')
+        zadanie = 3;
+    if(key == '4')
+        zadanie = 4;
 }
 
 //--------------------------------------------------------------

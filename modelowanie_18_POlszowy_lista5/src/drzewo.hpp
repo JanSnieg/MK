@@ -14,8 +14,6 @@
 #include <cmath>
 #include "ofMain.h"
 
-static const int RADIOUS = 2;
-
 struct tree
 {
     ofVec2f position;
@@ -78,9 +76,13 @@ struct forest
     bool canBurn = true;
     int wszystkie;
     int spalone;
+    int RADIOUS;
+    int WIDTH = ofGetWidth() * 0.9;
+    int HEIGHT = ofGetHeight() * 0.9;
     forest(int l = 10, double p = 0.5)
     {
         lenght = l;
+        RADIOUS = ofGetHeight() / (2 * lenght);
         std::mt19937 gen{std::random_device{}()};
         std::uniform_real_distribution<double> generate{0, 1};
         
@@ -152,7 +154,9 @@ struct forest
         {
             drzewo.setColor();
             ofSetColor(drzewo.treeColor);
-            ofDrawCircle(RADIOUS + drzewo.position * (2*RADIOUS), RADIOUS);
+            double scaledx = WIDTH * ((drzewo.position.x) / lenght) + ofGetWidth() * 0.05;
+            double scaledy = HEIGHT * ((drzewo.position.y) / lenght) + ofGetHeight() * 0.05;
+            ofDrawCircle(ofVec2f(scaledx, scaledy), RADIOUS);
         }
     }
     

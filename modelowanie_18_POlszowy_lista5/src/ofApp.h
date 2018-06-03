@@ -2,12 +2,15 @@
 
 #include "drzewo.hpp"
 #include "ofxSimpleScreenRecorder.h"
+#include "ofxGui.h"
 
 class ofApp : public ofBaseApp{
     
 	public:
         forest las;
         ofxSimpleScreenRecorder mRenderer;
+        ofxIntSlider velocity;
+        ofxPanel gui;
         int count;
 		void setup();
 		void update();

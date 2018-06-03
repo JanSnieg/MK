@@ -19,6 +19,11 @@ ofVec2f next_value(ofVec2f v)
     return ofVec2f(4 * v.y * v.x * (1-v.x), v.y);
 }
 
+ofVec2f next_log(ofVec2f v)
+{
+    return ofVec2f(log(abs(4 * v.y * (1- (2*v.x)))), v.y);
+}
+
 std::vector<ofVec2f> odwzorowanie(std::vector<ofVec2f> t, double r)
 {
     for(auto i=0; i<100; i++)
@@ -34,15 +39,33 @@ std::vector<ofVec2f> odwzorowanie_graniczne(std::vector<ofVec2f> t)
     {
         ofVec2f temp = t[0];
         
-        for(auto i=0; i<100000; i++)
+        for(auto i=0; i<10000; i++)
         {
             temp = next_value(ofVec2f(temp.x, _r));
         }
-        t[0] = temp;
+        temp;
         for(auto i=0; i<100; i++)
         {
-            t.push_back(next_value(ofVec2f(t[i].x, _r)));
+            temp = next_value((ofVec2f(temp.x, _r)));
+            t.push_back(temp);
         }
+    }
+    return t;
+}
+std::vector<ofVec2f> Lyapunov(std::vector<ofVec2f> t)
+{
+    t.clear();
+    for(double _r=0.7; _r<1; _r+=0.0001)
+    {
+        std::vector<double> result;
+        double x = 0.1;
+        for(auto i=0; i<100; i++)
+        {
+            x = next_value(ofVec2f(x, _r)).x;
+            result.push_back(next_log(ofVec2f(x, _r)).x);
+        }
+        double average = std::accumulate(result.begin(), result.end(), 0.0) / result.size();
+        t.push_back(ofVec2f(average, _r));
     }
     return t;
 }
@@ -69,10 +92,9 @@ void draw_line(std::vector<ofVec2f> _t)
 void draw_line2(std::vector<ofVec2f> _t)
 {
     ofPolyline line;
-    ofSetColor(200, 50, 50);
+    ofSetColor(63, 120, 0);
     for(auto&& i : _t)
     {
-//   normalized = (x-min(x))/(max(x)-min(x))
         double newx = ofGetWidth() * ((i.y - 0.7)/0.3);
         double newy = ofGetHeight() * i.x;
         line.addVertex(ofVec2f(newx, newy));
@@ -81,11 +103,43 @@ void draw_line2(std::vector<ofVec2f> _t)
 }
 void draw_points2(std::vector<ofVec2f> _t)
 {
-    ofSetColor(200, 50, 50);
+    ofSetColor(63, 120, 0);
     for(auto&& i : _t)
     {
         double newx = ofGetWidth() * ((i.y - 0.7)/0.3);
         double newy = ofGetHeight() * i.x;
         ofDrawCircle(ofVec2f(newx,newy), 2);
     }
+}
+void draw_points3(std::vector<ofVec2f> _t)
+{
+    ofSetColor(63, 120, 0);
+    for(auto&& i : _t)
+    {
+        double newx = ofGetWidth() * ((i.y - 0.92)/0.03);
+        double newy = ofGetHeight() * i.x;
+        ofDrawCircle(ofVec2f(newx,newy), 2);
+    }
+}
+void draw_points4(std::vector<ofVec2f> _t)
+{
+    ofSetColor(63, 120, 0);
+    for(auto&& i : _t)
+    {
+        double newx = ofGetWidth() * ((i.y - 0.7)/0.3);
+        double newy = ofGetHeight() * ((i.x + 4)/5);
+        ofDrawCircle(ofVec2f(newx,newy), 2);
+    }
+}
+void draw_line4(std::vector<ofVec2f> _t)
+{
+    ofPolyline line;
+    ofSetColor(63, 120, 0);
+    for(auto&& i : _t)
+    {
+        double newx = ofGetWidth() * ((i.y - 0.7)/0.3);
+        double newy = ofGetHeight() * ((i.x + 4)/5);
+        line.addVertex(ofVec2f(newx, newy));
+    }
+    line.draw();
 }

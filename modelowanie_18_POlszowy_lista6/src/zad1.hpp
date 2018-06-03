@@ -21,13 +21,18 @@ const int SIDE = 5;
 
 extern double wylosuj();
 extern ofVec2f next_value(ofVec2f);
+extern ofVec2f next_log(ofVec2f);
 extern std::vector<ofVec2f> odwzorowanie(std::vector<ofVec2f> t, double r);
 extern std::vector<ofVec2f> odwzorowanie_graniczne(std::vector<ofVec2f> t);
+std::vector<ofVec2f> Lyapunov(std::vector<ofVec2f> t);
 
 extern void draw_points(std::vector<ofVec2f> _t);
 extern void draw_line(std::vector<ofVec2f> _t);
 extern void draw_points2(std::vector<ofVec2f> _t);
 extern void draw_line2(std::vector<ofVec2f> _t);
+extern void draw_points3(std::vector<ofVec2f> _t);
+extern void draw_line4(std::vector<ofVec2f> _t);
+extern void draw_points4(std::vector<ofVec2f> _t);
 
 
 #endif /* zad1_hpp */
